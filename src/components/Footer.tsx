@@ -1,9 +1,10 @@
+import { memo } from "react";
 import { Link } from "wouter";
 import { ESGReportLogo } from "@/components/ui/esgreport-logo";
 import { TrafficLights } from "@/components/ui/traffic-lights";
 import { FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 
-export function Footer() {
+export const Footer = memo(function Footer() {
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container-responsive">
@@ -132,4 +133,4 @@ export function Footer() {
       </div>
     </footer>
   );
-}
+});

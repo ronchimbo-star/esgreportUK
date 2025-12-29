@@ -55,6 +55,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loadProfile = async (userId: string) => {
     try {
+      const cacheKey = `user-profile-${userId}`;
+      const cached = sessionStorage.getItem(cacheKey);
+
+      if (cached) {
+        const { data: cachedData, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < 5 * 60 * 1000) {
+          setProfile(cachedData);
+          setLoading(false);
+          return;
+        }
+      }
+
       const { data, error } = await supabase
         .from('users')
         .select('*')
@@ -62,6 +74,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         .maybeSingle();
 
       if (error) throw error;
+
+      if (data) {
+        sessionStorage.setItem(cacheKey, JSON.stringify({
+          data,
+          timestamp: Date.now()
+        }));
+      }
+
       setProfile(data);
     } catch (error) {
       console.error('Error loading profile:', error);

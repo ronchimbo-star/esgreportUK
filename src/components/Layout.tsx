@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, memo } from "react";
 import { NavBar } from "./NavBar";
 import { Footer } from "./Footer";
 import { LiveChat } from "./LiveChat";
@@ -12,7 +12,7 @@ interface LayoutProps {
   };
 }
 
-export function Layout({ children, isAuthenticated, user }: LayoutProps) {
+export const Layout = memo(function Layout({ children, isAuthenticated, user }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar isAuthenticated={isAuthenticated} user={user} />
@@ -23,4 +23,4 @@ export function Layout({ children, isAuthenticated, user }: LayoutProps) {
       <LiveChat />
     </div>
   );
-}
+});
