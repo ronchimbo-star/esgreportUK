@@ -72,51 +72,51 @@ export function NavBar() {
             {!isAuthenticated ? (
               <>
                 <Link href="/about">
-                  <a className="text-gray-600 hover:text-primary transition-colors">About</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">About</a>
                 </Link>
                 <Link href="/frameworks">
-                  <a className="text-gray-600 hover:text-primary transition-colors">Frameworks</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">Frameworks</a>
                 </Link>
                 <Link href="/pricing">
-                  <a className="text-gray-600 hover:text-primary transition-colors">Pricing</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">Pricing</a>
                 </Link>
                 <Link href="/contact">
-                  <a className="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">Contact</a>
                 </Link>
                 <div className="flex items-center space-x-3">
                   <Link href="/login">
-                    <Button size="sm" variant="ghost" className="font-normal">Sign In</Button>
+                    <Button size="sm" variant="ghost" className="font-normal text-sm">Sign In</Button>
                   </Link>
                   <Link href="/signup">
-                    <Button size="sm" className="font-normal">Sign Up</Button>
+                    <Button size="sm" className="font-normal text-sm">Sign Up</Button>
                   </Link>
                 </div>
               </>
             ) : (
               <>
                 <Link href="/dashboard">
-                  <a className="text-gray-600 hover:text-primary transition-colors">Dashboard</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">Dashboard</a>
                 </Link>
                 <Link href="/reports">
-                  <a className="text-gray-600 hover:text-primary transition-colors">Reports</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">Reports</a>
                 </Link>
                 <Link href="/analytics">
-                  <a className="text-gray-600 hover:text-primary transition-colors">Analytics</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">Analytics</a>
                 </Link>
                 <Link href="/ai-assistant">
-                  <a className="text-gray-600 hover:text-primary transition-colors">AI Assistant</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">AI Assistant</a>
                 </Link>
                 <Link href="/frameworks-auth">
-                  <a className="text-gray-600 hover:text-primary transition-colors">Frameworks</a>
+                  <a className="text-sm text-gray-600 hover:text-primary transition-colors">Frameworks</a>
                 </Link>
                 <div className="flex items-center space-x-3">
                   <Link href="/search">
-                    <Button variant="ghost" size="sm" className="font-normal">
+                    <Button variant="ghost" size="sm" className="font-normal text-sm">
                       <Search className="w-5 h-5" />
                     </Button>
                   </Link>
                   <Link href="/notifications">
-                    <Button variant="ghost" size="sm" className="relative font-normal">
+                    <Button variant="ghost" size="sm" className="relative font-normal text-sm">
                       <Bell className="w-5 h-5" />
                       {unreadCount > 0 && (
                         <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -135,7 +135,7 @@ export function NavBar() {
                       </span>
                     </div>
                   </Link>
-                  <Button size="sm" variant="outline" onClick={handleSignOut} className="font-normal">
+                  <Button size="sm" variant="outline" onClick={handleSignOut} className="font-normal text-sm">
                     Sign Out
                   </Button>
                 </div>
