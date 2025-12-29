@@ -14,10 +14,10 @@ export function TrafficLights({
   orientation = "horizontal"
 }: TrafficLightsProps) {
   const sizeClasses = {
-    sm: "h-2 w-8",
-    md: "h-3 w-12",
-    lg: "h-4 w-16",
-    xl: "h-6 w-24"
+    sm: "h-2 w-10",
+    md: "h-3 w-16",
+    lg: "h-4 w-24",
+    xl: "h-6 w-32"
   };
 
   const barSizes = {
