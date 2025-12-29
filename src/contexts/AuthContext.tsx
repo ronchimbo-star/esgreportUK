@@ -19,35 +19,38 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const mockUser = {
-    id: 'test-user-id',
-    email: 'test@example.com',
-    aud: 'authenticated',
-    role: 'authenticated',
-    created_at: new Date().toISOString(),
-    app_metadata: {},
-    user_metadata: {},
-  } as User;
-
-  const mockProfile: UserProfile = {
-    id: 'test-user-id',
-    email: 'test@example.com',
-    first_name: 'Test',
-    last_name: 'User',
-    role: 'admin',
-    organization_id: null,
-    onboarding_completed: true,
-    created_at: new Date().toISOString(),
-    updated_at: new Date().toISOString(),
-  };
-
-  const [session] = useState<Session | null>(null);
-  const [user] = useState<User | null>(mockUser);
-  const [profile] = useState<UserProfile | null>(mockProfile);
-  const [loading] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    return () => {};
+    setLoading(true);
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        loadProfile(session.user.id);
+      } else {
+        setLoading(false);
+      }
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      (async () => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          await loadProfile(session.user.id);
+        } else {
+          setProfile(null);
+          setLoading(false);
+        }
+      })();
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const loadProfile = async (userId: string) => {
@@ -140,6 +143,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     signOut,
     resetPassword,
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
