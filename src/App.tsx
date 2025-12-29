@@ -44,6 +44,7 @@ const UserManagement = lazy(() => import("@/pages/admin/UserManagement"));
 const AnalyticsDashboard = lazy(() => import("@/pages/admin/AnalyticsDashboard"));
 const SiteSettings = lazy(() => import("@/pages/admin/SiteSettings"));
 const Financial = lazy(() => import("@/pages/admin/Financial"));
+const ContactManagement = lazy(() => import("@/pages/admin/ContactManagement"));
 const Billing = lazy(() => import("@/pages/Billing"));
 const News = lazy(() => import("@/pages/News"));
 const NewsDetail = lazy(() => import("@/pages/NewsDetail"));
@@ -113,6 +114,7 @@ function App() {
           <Route path="/admin/analytics" component={AnalyticsDashboard} />
           <Route path="/admin/settings" component={SiteSettings} />
           <Route path="/admin/financial" component={Financial} />
+          <Route path="/admin/contacts" component={ContactManagement} />
           <Route path="/dashboard/billing" component={Billing} />
 
           <Route path="/news" component={News} />

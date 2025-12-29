@@ -19,7 +19,8 @@ import {
   AlertCircle,
   ArrowRight,
   Globe,
-  DollarSign
+  DollarSign,
+  Mail
 } from "lucide-react";
 
 type DashboardStats = {
@@ -125,6 +126,14 @@ export default function Admin() {
       href: "/admin/users",
       color: "text-green-600",
       bgColor: "bg-green-100",
+    },
+    {
+      title: "Contact Inquiries",
+      description: "View and respond to contact form submissions",
+      icon: Mail,
+      href: "/admin/contacts",
+      color: "text-cyan-600",
+      bgColor: "bg-cyan-100",
     },
     {
       title: "Financial Management",

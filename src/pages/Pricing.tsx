@@ -23,7 +23,7 @@ export default function Pricing() {
 
   const handleSubscribe = async (tier: string, priceId: string) => {
     if (!user) {
-      setLocation('/auth/login?redirect=/pricing');
+      setLocation('/login?redirect=/pricing');
       return;
     }
 
@@ -271,6 +271,91 @@ export default function Pricing() {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="py-16 bg-white">
+        <div className="container-responsive">
+          <h2 className="text-center mb-8">Detailed Feature Comparison</h2>
+
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse">
+              <thead>
+                <tr className="bg-gray-100">
+                  <th className="text-left p-4 font-semibold text-gray-900 border-b-2 border-gray-200">Feature</th>
+                  <th className="text-center p-4 font-semibold text-gray-900 border-b-2 border-gray-200">Starter</th>
+                  <th className="text-center p-4 font-semibold text-gray-900 border-b-2 border-gray-200">Professional</th>
+                  <th className="text-center p-4 font-semibold text-gray-900 border-b-2 border-gray-200">Enterprise</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-gray-200">
+                  <td className="p-4 font-medium">Framework Support</td>
+                  <td className="p-4 text-center">2 frameworks</td>
+                  <td className="p-4 text-center">All frameworks</td>
+                  <td className="p-4 text-center">All + Custom</td>
+                </tr>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <td className="p-4 font-medium">Users Included</td>
+                  <td className="p-4 text-center">50 users</td>
+                  <td className="p-4 text-center">200 users</td>
+                  <td className="p-4 text-center">Unlimited</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="p-4 font-medium">Reports per Month</td>
+                  <td className="p-4 text-center">10 reports</td>
+                  <td className="p-4 text-center">Unlimited</td>
+                  <td className="p-4 text-center">Unlimited</td>
+                </tr>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <td className="p-4 font-medium">Data Storage</td>
+                  <td className="p-4 text-center">10 GB</td>
+                  <td className="p-4 text-center">100 GB</td>
+                  <td className="p-4 text-center">Unlimited</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="p-4 font-medium">API Access</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-green-600">✓</td>
+                  <td className="p-4 text-center text-green-600">✓ Custom</td>
+                </tr>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <td className="p-4 font-medium">White-label Branding</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-green-600">✓</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="p-4 font-medium">AI-Assisted Reporting</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-green-600">✓</td>
+                  <td className="p-4 text-center text-green-600">✓</td>
+                </tr>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <td className="p-4 font-medium">Support</td>
+                  <td className="p-4 text-center">Email</td>
+                  <td className="p-4 text-center">Priority Email</td>
+                  <td className="p-4 text-center">Dedicated Manager</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <td className="p-4 font-medium">SLA Guarantee</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-green-600">✓ 99.9%</td>
+                </tr>
+                <tr className="bg-gray-50 border-b border-gray-200">
+                  <td className="p-4 font-medium">Custom Integrations</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-red-600">✗</td>
+                  <td className="p-4 text-center text-green-600">✓</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p className="text-center text-gray-500 text-sm mt-6">
+            Scroll horizontally on mobile to view all features
+          </p>
         </div>
       </div>
     </Layout>
