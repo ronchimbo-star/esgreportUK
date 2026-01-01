@@ -1,11 +1,16 @@
 [build]
-command = "npx vite build"
-publish = "dist"
-
-[build.environment]
-NODE_VERSION = "18"
+  publish = "dist"  # or "build" depending on your framework
+  command = "npm run build"  # or your build command
 
 [[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# For SPA frameworks like React, Vue, etc.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
