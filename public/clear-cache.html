@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Cache - ESGReport</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover { background: #0052a3; }
+        .success { color: #00aa00; }
+        .info { background: #e3f2fd; padding: 15px; border-radius: 4px; margin: 15px 0; }
+        pre { background: #f5f5f5; padding: 10px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>ESGReport - Cache Clearing Tool</h1>
+
+        <div class="info">
+            <strong>Problem:</strong> Your browser has aggressively cached old files. This tool will help clear everything.
+        </div>
+
+        <h2>Step 1: Clear Everything</h2>
+        <button onclick="clearAllCaches()">Clear All Caches & Storage</button>
+        <button onclick="unregisterServiceWorkers()">Unregister Service Workers</button>
+        <button onclick="clearEverything()">Do Everything</button>
+
+        <div id="status"></div>
+
+        <h2>Step 2: Verify</h2>
+        <button onclick="checkCache()">Check Current Cache Status</button>
+        <pre id="cacheInfo"></pre>
+
+        <h2>Step 3: Return to Site</h2>
+        <button onclick="window.location.href='/'">Go to ESGReport</button>
+
+        <h2>Manual Steps (if buttons don't work)</h2>
+        <ol>
+            <li><strong>Firefox:</strong>
+                <ul>
+                    <li>Press Ctrl+Shift+Delete (or Cmd+Shift+Delete on Mac)</li>
+                    <li>Select "Everything" for Time range</li>
+                    <li>Check: Cookies, Cache, Site Data</li>
+                    <li>Click "Clear Now"</li>
+                </ul>
+            </li>
+            <li><strong>Chrome:</strong>
+                <ul>
+                    <li>Press Ctrl+Shift+Delete (or Cmd+Shift+Delete on Mac)</li>
+                    <li>Select "All time"</li>
+                    <li>Check: Cookies, Cached images and files</li>
+                    <li>Click "Clear data"</li>
+                </ul>
+            </li>
+            <li><strong>Or try Incognito/Private mode</strong></li>
+        </ol>
+    </div>
+
+    <script>
+        const status = document.getElementById('status');
+        const cacheInfo = document.getElementById('cacheInfo');
+
+        async function clearAllCaches() {
+            try {
+                // Clear Cache Storage API
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    await Promise.all(cacheNames.map(name => caches.delete(name)));
+                    log('✓ Cleared ' + cacheNames.length + ' cache(s)');
+                }
+
+                // Clear localStorage
+                localStorage.clear();
+                log('✓ Cleared localStorage');
+
+                // Clear sessionStorage
+                sessionStorage.clear();
+                log('✓ Cleared sessionStorage');
+
+                // Clear IndexedDB
+                if ('indexedDB' in window) {
+                    const dbs = await indexedDB.databases();
+                    for (const db of dbs) {
+                        indexedDB.deleteDatabase(db.name);
+                    }
+                    log('✓ Cleared IndexedDB');
+                }
+
+                log('✓ All storage cleared!', 'success');
+            } catch (e) {
+                log('Error: ' + e.message, 'error');
+            }
+        }
+
+        async function unregisterServiceWorkers() {
+            try {
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    for (const registration of registrations) {
+                        await registration.unregister();
+                    }
+                    log('✓ Unregistered ' + registrations.length + ' service worker(s)');
+                } else {
+                    log('No service workers found');
+                }
+            } catch (e) {
+                log('Error: ' + e.message, 'error');
+            }
+        }
+
+        async function clearEverything() {
+            log('Clearing everything...', 'info');
+            await clearAllCaches();
+            await unregisterServiceWorkers();
+            log('Done! Now close this tab and try opening the site in a new tab.', 'success');
+        }
+
+        async function checkCache() {
+            let info = '';
+
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                info += 'Cache Storage: ' + cacheNames.length + ' caches\n';
+                info += cacheNames.join('\n') + '\n\n';
+            }
+
+            info += 'LocalStorage items: ' + Object.keys(localStorage).length + '\n';
+            info += 'SessionStorage items: ' + Object.keys(sessionStorage).length + '\n\n';
+
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                info += 'Service Workers: ' + registrations.length + '\n';
+            }
+
+            cacheInfo.textContent = info || 'No cached data found';
+        }
+
+        function log(message, type = 'info') {
+            const div = document.createElement('div');
+            div.style.padding = '8px';
+            div.style.margin = '5px 0';
+            div.style.borderRadius = '4px';
+
+            if (type === 'success') {
+                div.style.background = '#d4edda';
+                div.style.color = '#155724';
+            } else if (type === 'error') {
+                div.style.background = '#f8d7da';
+                div.style.color = '#721c24';
+            } else {
+                div.style.background = '#d1ecf1';
+                div.style.color = '#0c5460';
+            }
+
+            div.textContent = message;
+            status.appendChild(div);
+        }
+    </script>
+</body>
+</html>
