@@ -1,1 +1,16 @@
-/*    /index.html   200
+# Serve static assets normally, then redirect everything else to index.html for SPA routing
+/assets/*  200
+/*.js      200
+/*.css     200
+/*.png     200
+/*.jpg     200
+/*.jpeg    200
+/*.gif     200
+/*.svg     200
+/*.ico     200
+/*.woff    200
+/*.woff2   200
+/*.ttf     200
+/*.eot     200
+
+/*         /index.html   200

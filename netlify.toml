@@ -1,16 +1,34 @@
 [build]
-  publish = "dist"  # or "build" depending on your framework
-  command = "npm run build"  # or your build command
+  publish = "dist"
+  command = "npm run build"
 
+# SPA redirect - only catch non-asset routes
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = false
 
-# For SPA frameworks like React, Vue, etc.
+# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
+
+# Cache static assets
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Content-Type = "text/css; charset=utf-8"
