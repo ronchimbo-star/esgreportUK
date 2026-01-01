@@ -2,13 +2,6 @@
   publish = "dist"
   command = "npm run build"
 
-# SPA redirect - only catch non-asset routes
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-
 # Security headers
 [[headers]]
   for = "/*"
