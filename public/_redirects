@@ -1,0 +1,10 @@
+# Serve static assets directly
+/assets/*  200
+/esgreport_icon.png  200
+/esgreport_logo-dark-back.png  200
+/esgreport_logo-light-back.png  200
+/deploy-check.json  200
+/clear-cache.html  200
+
+# SPA fallback for all other routes
+/*  /index.html  200
