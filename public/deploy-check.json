@@ -1,4 +1,9 @@
 {
+  "site": "esgreport.co.uk",
+  "domain": "ESGReport Professional Platform",
+  "deployed": "2026-01-04T12:31:00Z",
+  "version": "1.0.0",
+  "buildId": "esgreport-main",
   "status": "ok",
   "timestamp": "2026-01-04",
   "build": "production",
