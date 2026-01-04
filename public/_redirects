@@ -1,10 +1,10 @@
-# Serve static assets directly
-/assets/*  200
-/esgreport_icon.png  200
-/esgreport_logo-dark-back.png  200
-/esgreport_logo-light-back.png  200
-/deploy-check.json  200
-/clear-cache.html  200
+# Serve static assets directly - must come BEFORE the catch-all
+/assets/*  /assets/:splat  200
+/*.png  /:splat  200
+/*.json  /:splat  200
+/*.html  /:splat  200
+/*.js  /:splat  200
+/*.css  /:splat  200
 
-# SPA fallback for all other routes
+# SPA fallback for all other routes (this must be LAST)
 /*  /index.html  200
