@@ -1,0 +1,9 @@
+{
+  "status": "ok",
+  "timestamp": "2026-01-04",
+  "build": "production",
+  "assets": {
+    "css": "generated",
+    "js": "bundled"
+  }
+}
